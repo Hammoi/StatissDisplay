@@ -13,7 +13,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ExperienceChange {
-	// +2,141.2 Berserk Experience
 	@SubscribeEvent
 	public void onReceived(ClientChatReceivedEvent event) {
 		System.out.println(event.message.getFormattedText() + ", " + StatissDisplay.getActiveClass() + " Experience");

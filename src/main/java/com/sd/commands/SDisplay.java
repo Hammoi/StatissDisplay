@@ -1,6 +1,7 @@
 package com.sd.commands;
 
 import java.awt.Color;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,7 +23,6 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentTranslation;
-import scala.actors.threadpool.Arrays;
 
 public class SDisplay implements ICommand{
 
