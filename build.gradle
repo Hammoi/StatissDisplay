@@ -20,14 +20,28 @@ plugins {
     id "net.minecraftforge.gradle.forge" version "2.0.2"
 }
 */
-version = "1.0"
-group= "com.yourname.modid" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "modid"
+version = "0.9.0"
+group= "hammoi.statssDisplay" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "StatissDisplay"
+
+configurations {
+    shade
+    implementation.extendsFrom shade
+
+}
+
+repositories {
+    maven {
+      name 'JitPack'
+      url 'https://jitpack.io'
+    }
+}
 
 minecraft {
     version = "1.8.9-11.15.1.2318-1.8.9"
     runDir = "run"
-    
+
+
     // the mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   snapshot are built nightly.
     // stable_#            stables are built at the discretion of the MCP team.
@@ -37,12 +51,22 @@ minecraft {
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
+
 dependencies {
+
+    shade('com.github.HypixelDev.PublicAPI:Java:master-SNAPSHOT') {
+      exclude group: 'com.google.code.gson'
+    }
+
+
+
+
+    shade 'com.github.Querz:NBT:5.2'
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"
     //compile "some.group:artifact:version"
-      
+
     // real examples
     //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
     //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
@@ -60,6 +84,7 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
 }
+
 
 processResources
 {
@@ -79,4 +104,17 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+jar {
+    configurations.shade.each { dep ->
+        from(project.zipTree(dep)){
+            exclude 'META-INF', 'META-INF/**'
+        }
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
