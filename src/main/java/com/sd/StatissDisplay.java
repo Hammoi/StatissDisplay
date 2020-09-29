@@ -7,6 +7,7 @@ import com.sd.events.Overlay;
 import com.sd.Config;
 import com.ss.Statiss;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
@@ -49,7 +50,6 @@ public class StatissDisplay {
 
 	@EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-    	
     	Config.setUpConfig(event.getSuggestedConfigurationFile());
     	
     	MinecraftForge.EVENT_BUS.register(new Overlay());
@@ -66,7 +66,6 @@ public class StatissDisplay {
     }
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-    	
 		SdisplayThread sdThread = new SdisplayThread(true);
 		
 		sdThread.start();

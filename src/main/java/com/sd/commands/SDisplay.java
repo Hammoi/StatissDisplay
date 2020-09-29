@@ -58,24 +58,26 @@ public class SDisplay implements ICommand{
 
 		if(args.length == 0) {
 			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("§7/sd move [x] [y] - Move the info overlay."));
-			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("§7/sd sync [name] - Sync your stats. Require Statiss. ([name] is optional)"));
+			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("§7/sd sync [name] - Sync your stats (name is optional)."));
 			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("§7/sd toggle - Turn the mod on or off."));
 			return;
 		}
 
 		switch(args[0]) {
 		case "toggle":
-			if(Config.isToggled()) {
-				Config.toggle(false);
+			if(Config.getConfigValue("toggle").getAsBoolean()) {
+				Config.writeConfigValue("toggle", false);
+				Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("§7StatissDisplay is toggled §coff"));
 			} else {
-				Config.toggle(true);
+				Config.writeConfigValue("toggle", true);
+				Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("§7StatissDisplay is toggled §aon"));
 			}
 			break;
 		case "sync":
 			try {
 				SdisplayThread sdThread;
 				if(args.length > 1) {
-					sdThread = new SdisplayThread(false, MinecraftServer.getServer().getPlayerProfileCache().getGameProfileForUsername(args[1]).getId());
+					sdThread = new SdisplayThread(false, args[1]);
 				} else {
 					sdThread = new SdisplayThread(false);
 				}
@@ -96,8 +98,8 @@ public class SDisplay implements ICommand{
 				Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("§cInvalid values!"));
 				break;
 			}
-			Config.setX(Integer.valueOf(args[1]));
-			Config.setY(Integer.valueOf(args[2]));
+			Config.writeConfigValue("x", Integer.valueOf(args[1]));
+			Config.writeConfigValue("y", Integer.valueOf(args[2]));
 			Overlay.x = Integer.valueOf(args[1]);
 			Overlay.y = Integer.valueOf(args[2]);
 			break;

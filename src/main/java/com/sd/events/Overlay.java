@@ -42,12 +42,12 @@ public class Overlay {
 
 	}
 	
-	public static int x = Config.x();
-	public static int y = Config.y();
+	public static int x = Config.getConfigValue("x").getAsInt();
+	public static int y = Config.getConfigValue("y").getAsInt();
 	
 	@SubscribeEvent
 	public void onRender(RenderGameOverlayEvent event) {
-		if (event.type == ElementType.TEXT && Config.isToggled()) {
+		if (event.type == ElementType.TEXT && Config.getConfigValue("toggle").getAsBoolean()) {
 			
 			
 			
