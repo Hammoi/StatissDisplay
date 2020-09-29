@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = StatissDisplay.MODID, name = StatissDisplay.NAME, version = StatissDisplay.VERSION, dependencies = "required-after:statiss@[0.9.7,)")
+@Mod(modid = StatissDisplay.MODID, name = StatissDisplay.NAME, version = StatissDisplay.VERSION, dependencies = "required-after:statiss@[0.9.3,)")
 public class StatissDisplay {
 	
     public static final String MODID = "statissDisplay";
