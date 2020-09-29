@@ -54,14 +54,6 @@ minecraft {
 
 dependencies {
 
-    shade('com.github.HypixelDev.PublicAPI:Java:master-SNAPSHOT') {
-      exclude group: 'com.google.code.gson'
-    }
-
-
-
-
-    shade 'com.github.Querz:NBT:5.2'
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"
